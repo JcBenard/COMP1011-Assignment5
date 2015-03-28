@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <TableLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent" >
+    android:layout_height="match_parent" 
+    android:padding="5dp"
+    android:stretchColumns="1, 2, 3">
 
     <TableRow
         android:id="@+id/tableRow0"
@@ -12,12 +14,18 @@
             android:id="@+id/inperialRadioButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:paddingRight="5dp"
             android:text="Imperial" />
 
         <RadioButton
             android:id="@+id/metricRadioButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:paddingRight="5dp"
             android:text="Metric" />
 
     </TableRow>
@@ -31,12 +39,16 @@
             android:id="@+id/heightTextView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:paddingRight="5dp"
             android:text="Height" />
 
         <EditText
             android:id="@+id/heightEditText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:gravity="center"
             android:ems="10"
             android:inputType="number"
             android:text="0" >
@@ -55,12 +67,16 @@
             android:id="@+id/weightTextView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:paddingRight="5dp"
             android:text="Weight" />
 
         <EditText
             android:id="@+id/weightEditText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:gravity="center"
             android:ems="10"
             android:inputType="number"
             android:text="0" />
@@ -76,7 +92,19 @@
             android:id="@+id/calculateButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:paddingRight="5dp"
             android:text="Calculate" />
+
+        <EditText
+            android:id="@+id/editText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:gravity="center"
+            android:inputType="numberDecimal"
+            android:text="0.0" />
 
     </TableRow>
 
@@ -86,26 +114,14 @@
         android:layout_height="wrap_content" >
 
         <EditText
-            android:id="@+id/editText"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:ems="10"
-            android:inputType="numberDecimal"
-            android:text="0" />
-
-    </TableRow>
-
-    <TableRow
-        android:id="@+id/tableRow5"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content" >
-
-        <EditText
             android:id="@+id/bmiTypeEditText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_weight="2"
+            android:gravity="center"
             android:ems="10"
-            android:inputType="textMultiLine" />
+            android:inputType="textMultiLine"
+            android:text="Body Type" />
 
     </TableRow>
 
