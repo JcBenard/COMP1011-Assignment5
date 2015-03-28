@@ -96,8 +96,11 @@ public class MainActivity extends Activity implements OnClickListener{
 	    
 	    //display the bmi in the proper field
 	    this._bmiEditText.setText(String.format("%.01f", this._bmi));
+	    
+	    _bmiCatagory();
     }
     
+    //calculate the bmi based on the selected units, the height and the weight
     private void _calculateBmi(){
     	if(this._selection.equals("Imperial")){
     		this._bmi = ((this._weight * 703) / (this._height * this._height));
@@ -106,24 +109,34 @@ public class MainActivity extends Activity implements OnClickListener{
     		this._bmi = (this._weight / (this._height * this._height));
     	}
     }
+    
+    //set the text in the bmi type field acording to what catagory the bmi falls in
+    private void _bmiCatagory(){
 
-
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.main, menu);
-        return true;
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
-        if (id == R.id.action_settings) {
-            return true;
-        }
-        return super.onOptionsItemSelected(item);
+    	if(this._bmi < 18.5){
+    		this._bmiTypeEditText.setText("You are in the underweight catagory");
+    	}else if(this._bmi < 25){
+    		this._bmiTypeEditText.setText("You are in the normal catagory");
+    	}else if(this._bmi < 30){
+    		this._bmiTypeEditText.setText("You are in the overweight catagory");
+    	}else if(this._bmi >= 30){
+    		this._bmiTypeEditText.setText("You are in the obese catagory");
+    	}
+    	
+    	//attempted to do a swtich but android dosen't seem to like it
+    	/*switch(true){
+    		case(this._bmi < 18.5):
+    			this._bmiTypeEditText.setText("You are in the underweight catagory");
+    			break;
+    		case(this._bmi < 25):
+    			this._bmiTypeEditText.setText("You are in the normal catagory");
+    			break;
+    		case(this._bmi < 30):
+    			this._bmiTypeEditText.setText("You are in the overweight catagory");
+    			break;
+    		case(this._bmi >= 30):
+    			this._bmiTypeEditText.setText("You are in the obese catagory");
+    			break;
+    	}*/
     }
 }
