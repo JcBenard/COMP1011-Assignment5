@@ -89,21 +89,21 @@ public class MainActivity extends Activity implements OnClickListener{
 	    
 	    //get the weight and height
 	    this._weight = Integer.valueOf(this._weightEditText.getText().toString());
-	    this._height = Double.valueOf(this._weightEditText.getText().toString());
+	    this._height = Double.valueOf(this._heightEditText.getText().toString());
 	    
+	    //call this method to calculate the bmi
 	    _calculateBmi();
 	    
-	    this._bmiEditText.setText(String.format("%.02f", this._bmi));
+	    //display the bmi in the proper field
+	    this._bmiEditText.setText(String.format("%.01f", this._bmi));
     }
     
     private void _calculateBmi(){
     	if(this._selection.equals("Imperial")){
     		this._bmi = ((this._weight * 703) / (this._height * this._height));
-    		this._bmiTypeEditText.setText(this._selection + this._bmi);
     	}
     	else if (this._selection.equals("Metric")){
     		this._bmi = (this._weight / (this._height * this._height));
-    		this._bmiTypeEditText.setText(this._selection + this._bmi);
     	}
     }
 
