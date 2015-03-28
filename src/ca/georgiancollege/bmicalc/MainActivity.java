@@ -16,13 +16,16 @@ import android.view.View.OnClickListener;
 
 public class MainActivity extends Activity implements OnClickListener{
 
+	//private instanced variables
 	private static final String HEIGHT = "HEIGHT";
 	private static final String WEIGHT = "WEIGHT";
 	private static final String BMI = "BMI";
+	private static final String SELECTION = "SELECTION";
 	
-	private int _height;
+	private double _height;
 	private int _weight;
 	private double _bmi;
+	private String _selection;
 	private EditText _weightEditText;
 	private EditText _heightEditText;
 	private EditText _bmiEditText;
@@ -36,19 +39,23 @@ public class MainActivity extends Activity implements OnClickListener{
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main);
         
+        //check if the applcation has previous data and set the field to that information if there is
         if(savedInstanceState == null)
         {
         	this._height = 0;
         	this._weight = 0;
         	this._bmi = 0;
+        	this._selection = "";
         }
         else
         {
-        	this._height = savedInstanceState.getInt(HEIGHT);
+        	this._height = savedInstanceState.getDouble(HEIGHT);
         	this._weight = savedInstanceState.getInt(WEIGHT);
         	this._bmi = savedInstanceState.getDouble(BMI);
+        	this._selection = savedInstanceState.getString(SELECTION);
         }
         
+        //link the variables to the application's gui
         this._weightEditText = (EditText) findViewById(R.id.weightEditText);
         this._heightEditText = (EditText) findViewById(R.id.heightEditText);
         this._bmiEditText = (EditText) findViewById(R.id.bmiEditText);
@@ -56,16 +63,48 @@ public class MainActivity extends Activity implements OnClickListener{
         this._radioGroup = (RadioGroup) findViewById(R.id.radioGroup);
         this._calculate = (Button) findViewById(R.id.calculateButton); 
         
+        //create an event listener for the button
         this._calculate.setOnClickListener(this); 
         
     }
     
+    @Override
+	protected void onSaveInstanceState(Bundle outState) {
+		super.onSaveInstanceState(outState);
+		
+		outState.putInt(WEIGHT, this._weight);
+		outState.putDouble(HEIGHT, this._height);
+		outState.putDouble(BMI, this._bmi);
+		outState.putString(SELECTION, this._selection);
+	}
+    
     public void onClick(View v){
-	    int id = this._radioGroup.getCheckedRadioButtonId();
+    	//method variables
+    	int id;
+    	
+    	//get what radio button is selected and put it into a string
+	    id = this._radioGroup.getCheckedRadioButtonId();
 	    this._selectedButton = (RadioButton) findViewById(id);
-	    String selection = (String) this._selectedButton.getText();
+	    this._selection = (String) this._selectedButton.getText();
 	    
-	    this._bmiTypeEditText.setText(selection);
+	    //get the weight and height
+	    this._weight = Integer.valueOf(this._weightEditText.getText().toString());
+	    this._height = Double.valueOf(this._weightEditText.getText().toString());
+	    
+	    _calculateBmi();
+	    
+	    this._bmiEditText.setText(String.format("%.02f", this._bmi));
+    }
+    
+    private void _calculateBmi(){
+    	if(this._selection.equals("Imperial")){
+    		this._bmi = ((this._weight * 703) / (this._height * this._height));
+    		this._bmiTypeEditText.setText(this._selection + this._bmi);
+    	}
+    	else if (this._selection.equals("Metric")){
+    		this._bmi = (this._weight / (this._height * this._height));
+    		this._bmiTypeEditText.setText(this._selection + this._bmi);
+    	}
     }
 
 
